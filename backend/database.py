@@ -1,16 +1,24 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import urllib.parse  # This is the important new part
 
-# This safely handles the '@' in your password
-password = urllib.parse.quote_plus("Sagar@2004")
-URL = f"mysql+mysqlconnector://root:{password}@localhost/extension_guard"
+# 1. DATABASE CONNECTION STRING
+# Format: mysql+pymysql://user:password@host:port/dbname
+# We use os.getenv so the cloud can inject the password securely
+DB_URL = os.getenv(
+    "DATABASE_URL", 
+    "mysql+pymysql://avnadmin:<redacted>@mysql-31d5a92f-sagarssmrvpucollege-69f8.a.aivencloud.com:12005/defaultdb"
+)
 
-engine = create_engine(URL)
+# 2. CREATE THE ENGINE
+engine = create_engine(DB_URL)
+
+# 3. SESSION AND BASE
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+# 4. DEPENDENCY
 def get_db():
     db = SessionLocal()
     try:
