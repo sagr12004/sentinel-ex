@@ -16,7 +16,7 @@ function App() {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const res = await axios.post('http://127.0.0.1:8000/analyze', formData);
+      const res = await axios.post('https://sentinel-ex.onrender.com/analyze', formData);
       setResult(res.data);
     } catch (e) { alert("Scanner Offline"); } finally { setLoading(false); }
   };

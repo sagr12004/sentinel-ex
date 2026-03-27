@@ -8,7 +8,7 @@ const HistoryPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/history').then(res => setData(res.data));
+    axios.get('https://sentinel-ex.onrender.com/history').then(res => setData(res.data));
   }, []);
 
   return (

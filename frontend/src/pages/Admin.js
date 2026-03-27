@@ -7,14 +7,14 @@ const Admin = () => {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/history')
+    axios.get('https://sentinel-ex.onrender.com/history')
       .then(res => setLogs(res.data))
       .catch(() => console.log("Database offline"));
   }, []);
 
   const handleWipe = async () => {
     if (window.confirm("Delete all scan history?")) {
-      await axios.delete('http://127.0.0.1:8000/admin/wipe');
+      await axios.delete('https://sentinel-ex.onrender.com/admin/wipe');
       setLogs([]);
     }
   };

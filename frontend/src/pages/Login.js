@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     const endpoint = isSignup ? 'register' : 'login';
     try {
-      const res = await axios.post(`http://127.0.0.1:8000/${endpoint}`, form);
+      const res = await axios.post(`https://sentinel-ex.onrender.com/${endpoint}`, form);
       if (res.data.status === "success") {
         navigate('/home');
       }
